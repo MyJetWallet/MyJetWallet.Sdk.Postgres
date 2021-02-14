@@ -100,7 +100,7 @@ Build succeeded.
 Connection string: <Print connection string to the databse where need to create migration>
 ```
 
-after migration created and commit to the database. Also, migration will stored in the folder `Migrations`
+after migration created, migration will stored in the folder `Migrations`
 
 After the start, the application will check the database. And if migration missed then automatically execute migration in the database.
 
