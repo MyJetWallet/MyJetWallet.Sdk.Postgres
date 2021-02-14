@@ -60,7 +60,7 @@ Register database into the services
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDatabase(MyContext.MigrationHistoryTable, MyContext.Schema, ConnectionString, o => new MyContext(o));
+            services.AddDatabase(MyContext.Schema, ConnectionString, o => new MyContext(o));
         }
     }
 ```
