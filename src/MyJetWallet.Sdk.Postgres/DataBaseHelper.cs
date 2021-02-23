@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+// ReSharper disable UnusedMember.Global
 
 namespace MyJetWallet.Sdk.Postgres
 {
@@ -25,6 +26,22 @@ namespace MyJetWallet.Sdk.Postgres
 
             using var context = contextFactory(contextOptions.Options);
             context.Database.Migrate();
+        }
+
+        public static void AddDatabaseWithoutMigrations<T>(this IServiceCollection services, string schema, string connectionString)
+            where T : DbContext
+        {
+            services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<T>();
+                optionsBuilder.UseNpgsql(connectionString,
+                    builder =>
+                        builder.MigrationsHistoryTable(
+                            $"__EFMigrationsHistory_{schema}",
+                            schema));
+
+                return optionsBuilder;
+            });
         }
     }
 }
