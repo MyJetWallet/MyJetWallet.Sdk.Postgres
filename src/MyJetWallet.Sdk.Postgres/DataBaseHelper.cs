@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MyJetWallet.Sdk.Service;
+
 // ReSharper disable UnusedMember.Global
 
 namespace MyJetWallet.Sdk.Postgres
@@ -39,8 +42,19 @@ namespace MyJetWallet.Sdk.Postgres
 
             var contextOptions = services.BuildServiceProvider().GetRequiredService<DbContextOptionsBuilder<T>>();
 
-            using var context = contextFactory(contextOptions.Options);
-            context.Database.Migrate();
+            using var activity = MyTelemetry.StartActivity("database migration");
+            {
+                Console.WriteLine("======= begin database migration =======");
+                var sw = new Stopwatch();
+                sw.Start();
+                
+                using var context = contextFactory(contextOptions.Options);
+
+                context.Database.Migrate();
+
+                sw.Stop();
+                Console.WriteLine($"======= end database migration ({sw.Elapsed.ToString()}) =======");
+            }
         }
 
         public static void AddDatabaseWithoutMigrations<T>(this IServiceCollection services, string schema, string connectionString)
