@@ -19,7 +19,6 @@ dotnet add package MyJetWallet.Sdk.Postgres
 Create DbContext
 
 ```
-    [Table("MyTable")]
     public class MyTable
     {
         public int Id { get; set; }
