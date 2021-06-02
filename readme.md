@@ -36,6 +36,16 @@ Create DbContext
         public MyContext(DbContextOptions options) : base(options)
         {
         }
+        
+        public static ILoggerFactory LoggerFactory { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (LoggerFactory != null)
+            {
+                optionsBuilder.UseLoggerFactory(LoggerFactory).EnableSensitiveDataLogging();
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,6 +80,7 @@ Register database into the services
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDatabase(MyContext.Schema, ConnectionString, o => new MyContext(o));
+            MyContext.LoggerFactory = Program.LoggerFactory;
         }
     }
 ```
