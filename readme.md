@@ -19,7 +19,7 @@ dotnet add package MyJetWallet.Sdk.Postgres
 Create DbContext
 
 ```
-    public class MyTable
+    public class MyDbEntity
     {
         public int Id { get; set; }
 
@@ -29,8 +29,9 @@ Create DbContext
     public class MyContext: DbContext
     {
         public const string Schema = "myschema";
+        public const string MyDbTableName = "mydbtable"
 
-        public DbSet<MyTable> MyTable { get; set; }
+        public DbSet<MyDbEntity> MyDbEntity { get; set; }
 
         public MyContext(DbContextOptions options) : base(options)
         {
@@ -40,6 +41,11 @@ Create DbContext
         {
             modelBuilder.HasDefaultSchema(Schema);
 
+            modelBuilder.Entity<MyDbEntity>().ToTable(MyDbTableName);
+            modelBuilder.Entity<MyDbEntity>().Property(e => e.Id).UseIdentityColumn();
+            modelBuilder.Entity<MyDbEntity>().HasKey(e => e.Id);
+            modelBuilder.Entity<MyDbEntity>().Property(e => e.Text).HasMaxLength(1024);
+            
             base.OnModelCreating(modelBuilder);
         }
     }
