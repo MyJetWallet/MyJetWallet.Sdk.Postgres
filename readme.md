@@ -51,7 +51,7 @@ Create DbContext
     }
 ```
 
-Setup class to Design-Time connect to the database. The class will auto-used for the creating migration.
+Setup class to DesignTime connect to the database. The class will auto-used for the creating migration.
 
 ```
     public class ContextFactory : MyDesignTimeContextFactory<MyContext>
