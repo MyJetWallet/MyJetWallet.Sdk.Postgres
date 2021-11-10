@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\ci-test.yml = .github\workflows\ci-test.yml
 		readme.md = readme.md
 		.github\workflows\release-api-client.yml = .github\workflows\release-api-client.yml
+		.github\workflows\update_nuget.yaml = .github\workflows\update_nuget.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyJetWallet.Sdk.Postgres", "src\MyJetWallet.Sdk.Postgres\MyJetWallet.Sdk.Postgres.csproj", "{76BF35EA-A66D-4EE9-89CD-8705EACB72B0}"

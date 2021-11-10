@@ -12,7 +12,8 @@ namespace MyJetWallet.Sdk.Postgres
 {
     public static class DataBaseHelper
     {
-        public static void AddDatabase<T>(this IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory)
+        public static void AddDatabase<T>(this IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory,
+            bool replaceSllInstruction = true)
             where T : DbContext
         {
             if (!connectionString.Contains("ApplicationName"))
@@ -27,6 +28,9 @@ namespace MyJetWallet.Sdk.Postgres
                     ? $"{connectionString};ApplicationName={appName}" 
                     : $"{connectionString}ApplicationName={appName}";
             }
+
+            if (replaceSllInstruction)
+                connectionString = connectionString.Replace("Ssl Mode=Require", "Ssl Mode=VerifyFull");
 
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
