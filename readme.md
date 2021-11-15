@@ -16,7 +16,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package MyJetWallet.Sdk.Postgres
 ```
 
-Create DbContext
+Create DbContext. **NEED INHERITE `MyDbContext`!**
 
 ```
     public class MyDbEntity
@@ -26,7 +26,7 @@ Create DbContext
         public string Text { get; set; }
     }
 
-    public class MyContext: DbContext
+    public class MyContext: MyDbContext
     {
         public const string Schema = "myschema";
         public const string MyDbTableName = "mydbtable"
@@ -35,16 +35,6 @@ Create DbContext
 
         public MyContext(DbContextOptions options) : base(options)
         {
-        }
-        
-        public static ILoggerFactory LoggerFactory { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (LoggerFactory != null)
-            {
-                optionsBuilder.UseLoggerFactory(LoggerFactory).EnableSensitiveDataLogging();
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
