@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace MyJetWallet.Sdk.Postgres
 {
-    public class MyDesignTimeContextFactory<T> : IDesignTimeDbContextFactory<T> where T : DbContext
+    public class MyDesignTimeContextFactory<T> : IDesignTimeDbContextFactory<T> where T : MyDbContext
     {
         private readonly Func<DbContextOptions, T> _contextFactory;
 
