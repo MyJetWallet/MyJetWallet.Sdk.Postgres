@@ -80,7 +80,7 @@ namespace MyJetWallet.Sdk.Postgres
         }
 
         public static PropertyBuilder<DateTime> SpecifyKindUtc<TEntity>(
-            EntityTypeBuilder<TEntity> builder,
+            this EntityTypeBuilder<TEntity> builder,
             Expression<Func<TEntity, DateTime>> propertyExpression)
             where TEntity : class
         {
