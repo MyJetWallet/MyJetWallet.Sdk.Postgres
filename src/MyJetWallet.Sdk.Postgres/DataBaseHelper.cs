@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using MyJetWallet.Sdk.Service;
 
@@ -75,6 +77,21 @@ namespace MyJetWallet.Sdk.Postgres
 
                 return optionsBuilder;
             });
+        }
+
+        public static PropertyBuilder<DateTime> SpecifyKindUtc<TEntity>(
+            EntityTypeBuilder<TEntity> builder,
+            Expression<Func<TEntity, DateTime>> propertyExpression)
+            where TEntity : class
+        {
+            var res = builder
+                .Property(propertyExpression)
+                .HasConversion(
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc),
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+            return res;
+
         }
     }
 }
