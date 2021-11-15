@@ -17,16 +17,16 @@ namespace MyJetWallet.Sdk.Postgres
 
         public T CreateDbContext(string[] args)
         {
-            var connString = string.Empty;
+            //var connString = string.Empty;
 
-            while (string.IsNullOrEmpty(connString))
-            {
-                Console.Write("Connection string: ");
-                connString = Console.ReadLine();
-            }
+            //while (string.IsNullOrEmpty(connString))
+            //{
+            //    Console.Write("Connection string: ");
+            //    connString = Console.ReadLine();
+            //}
 
             var optionsBuilder = new DbContextOptionsBuilder<T>();
-            optionsBuilder.UseNpgsql(connString);
+            //optionsBuilder.UseNpgsql(connString);
 
             return _contextFactory(optionsBuilder.Options);
         }
