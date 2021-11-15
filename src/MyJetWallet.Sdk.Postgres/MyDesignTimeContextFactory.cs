@@ -26,7 +26,7 @@ namespace MyJetWallet.Sdk.Postgres
             //}
 
             var optionsBuilder = new DbContextOptionsBuilder<T>();
-            //optionsBuilder.UseNpgsql(connString);
+            optionsBuilder.UseNpgsql();
 
             return _contextFactory(optionsBuilder.Options);
         }
