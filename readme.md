@@ -70,7 +70,8 @@ Register database into the services
         public void ConfigureServices(IServiceCollection services)
         {
             MyContext.LoggerFactory = Program.LoggerFactory;
-            services.AddDatabase(MyContext.Schema, ConnectionString, o => new MyContext(o));            
+            services.AddDatabase(MyContext.Schema, ConnectionString, o => new MyContext(o));  
+            MyContext.LoggerFactory = null;
         }
     }
 ```
