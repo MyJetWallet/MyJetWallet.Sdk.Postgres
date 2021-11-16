@@ -18,21 +18,7 @@ namespace MyJetWallet.Sdk.Postgres
             bool replaceSllInstruction = true)
             where T : DbContext
         {
-            if (!connectionString.Contains("ApplicationName"))
-            {
-                var appName = Environment.GetEnvironmentVariable("ENV_INFO");
-                if (appName == null)
-                {
-                    appName = Assembly.GetEntryAssembly()?.GetName().Name;
-                }
-
-                connectionString = connectionString.Last() != ';' 
-                    ? $"{connectionString};ApplicationName={appName}" 
-                    : $"{connectionString}ApplicationName={appName}";
-            }
-
-            if (replaceSllInstruction)
-                connectionString = connectionString.Replace("Ssl Mode=Require", "Ssl Mode=VerifyFull");
+            connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
 
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
@@ -63,9 +49,33 @@ namespace MyJetWallet.Sdk.Postgres
             }
         }
 
-        public static void AddDatabaseWithoutMigrations<T>(this IServiceCollection services, string schema, string connectionString)
+        private static string PrepareConnectionString(string connectionString, bool replaceSllInstruction)
+        {
+            if (!connectionString.Contains("ApplicationName"))
+            {
+                var appName = Environment.GetEnvironmentVariable("ENV_INFO");
+                if (appName == null)
+                {
+                    appName = Assembly.GetEntryAssembly()?.GetName().Name;
+                }
+
+                connectionString = connectionString.Last() != ';'
+                    ? $"{connectionString};ApplicationName={appName}"
+                    : $"{connectionString}ApplicationName={appName}";
+            }
+
+            if (replaceSllInstruction)
+                connectionString = connectionString.Replace("Ssl Mode=Require", "Ssl Mode=VerifyFull");
+            
+            return connectionString;
+        }
+
+        public static void AddDatabaseWithoutMigrations<T>(this IServiceCollection services, string schema, string connectionString,
+            bool replaceSllInstruction = true)
             where T : DbContext
         {
+            connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
+            
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<T>();
