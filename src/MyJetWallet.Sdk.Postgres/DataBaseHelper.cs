@@ -18,6 +18,8 @@ namespace MyJetWallet.Sdk.Postgres
             bool replaceSllInstruction = true)
             where T : DbContext
         {
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
 
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
@@ -74,6 +76,8 @@ namespace MyJetWallet.Sdk.Postgres
             bool replaceSllInstruction = true)
             where T : DbContext
         {
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
             
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
