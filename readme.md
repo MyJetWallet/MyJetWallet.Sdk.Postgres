@@ -117,3 +117,22 @@ After the start, the application will check the database. And if migration misse
 
 
 More detail you can read here: https://docs.microsoft.com/en-us/ef/core/cli/dotnet
+
+
+# Min value for DateTime
+
+```
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.HasDefaultSchema(Schema);
+
+    modelBuilder.Entity<MyDbEntity>().ToTable(MyDbTableName);
+    modelBuilder.Entity<MyDbEntity>().Property(e => e.Time).HasDefaultValue(DateTime.MinValue);
+
+    base.OnModelCreating(modelBuilder);
+}
+
+
+
+```
+
