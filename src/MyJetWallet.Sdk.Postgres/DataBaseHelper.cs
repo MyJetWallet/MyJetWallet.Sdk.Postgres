@@ -27,9 +27,11 @@ namespace MyJetWallet.Sdk.Postgres
                 var optionsBuilder = new DbContextOptionsBuilder<T>();
                 optionsBuilder.UseNpgsql(connectionString,
                     builder =>
-                        builder.MigrationsHistoryTable(
-                            $"__EFMigrationsHistory_{schema}",
-                            schema));
+                    {
+                        builder.MigrationsHistoryTable($"__EFMigrationsHistory_{schema}", schema);
+                        builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(5), null);
+                    });
+                
 
                 return optionsBuilder;
             });
