@@ -22,13 +22,14 @@ namespace MyJetWallet.Sdk.Postgres
 
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
 
+            var migrationTableName = $"__EFMigrationsHistory_{schema}";
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<T>();
                 optionsBuilder.UseNpgsql(connectionString,
                     builder =>
                     {
-                        builder.MigrationsHistoryTable($"__EFMigrationsHistory_{schema}", schema);
+                        builder.MigrationsHistoryTable(migrationTableName, schema);
                         builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(5), null);
                     });
                 
@@ -36,9 +37,7 @@ namespace MyJetWallet.Sdk.Postgres
                 return optionsBuilder;
             });
             
-            // new service<T>($"__EFMigrationsHistory_{schema}", schema)
-            // ctx.RawSql ("select * from schema.__EFMigrationsHistory_{schema} limit 1")
-            
+            services.AddSingleton<SqlLiveChecker<T>>();
 
             var contextOptions = services.BuildServiceProvider().GetRequiredService<DbContextOptionsBuilder<T>>();
 
@@ -85,18 +84,21 @@ namespace MyJetWallet.Sdk.Postgres
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
-            
+            var migrationTableName = $"__EFMigrationsHistory_{schema}";
+
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<T>();
                 optionsBuilder.UseNpgsql(connectionString,
                     builder =>
                         builder.MigrationsHistoryTable(
-                            $"__EFMigrationsHistory_{schema}",
+                            migrationTableName,
                             schema));
 
                 return optionsBuilder;
             });
+
+            services.AddSingleton<SqlLiveChecker<T>>();
         }
 
         public static PropertyBuilder<DateTime> SpecifyKindUtc<TEntity>(
