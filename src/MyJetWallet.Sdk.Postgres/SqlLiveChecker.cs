@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -28,8 +29,8 @@ public class SqlLiveChecker<T> : IHostedService where T : DbContext
         try
         {
             await using var context = (T)Activator.CreateInstance(typeof(T), _dbContextOptionsBuilder.Options);
-            FormattableString sql = $@"SELECT * from {DataBaseHelper.MigrationTableSchema}.""{DataBaseHelper.MigrationTableName}"" LIMIT 1";
-            await context.Database.ExecuteSqlAsync(sql);
+            var sql = $@"SELECT * from {DataBaseHelper.MigrationTableSchema}.""{DataBaseHelper.MigrationTableName}"" LIMIT 1;";
+            await context.Database.GetDbConnection().QueryAsync($"{sql}");
             if(MyDbContext.IsAlive == false)
                 _logger.LogInformation("Connection to database is restored");
             
