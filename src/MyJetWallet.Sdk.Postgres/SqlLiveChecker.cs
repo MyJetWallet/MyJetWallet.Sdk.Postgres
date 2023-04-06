@@ -13,14 +13,13 @@ public class SqlLiveChecker<T> : IHostedService where T : DbContext
     private readonly ILogger<SqlLiveChecker<T>> _logger;
     private readonly MyTaskTimer _timer;
     private readonly DbContextOptionsBuilder<T> _dbContextOptionsBuilder;
-    private static string _tableName;
+
     public SqlLiveChecker(ILogger<SqlLiveChecker<T>> logger, DbContextOptionsBuilder<T> dbContextOptionsBuilder)
     {
         _logger = logger;
         _dbContextOptionsBuilder = dbContextOptionsBuilder;
         _timer = new MyTaskTimer(typeof(SqlLiveChecker<T>), TimeSpan.FromSeconds(10), logger, DoTime);
-        _tableName = DataBaseHelper.MigrationTableName;
-        
+
         _logger.LogInformation("Database liveness checker is started");
     }
 
@@ -28,8 +27,9 @@ public class SqlLiveChecker<T> : IHostedService where T : DbContext
     {
         try
         {
-            await using var context = new MyDbContext(_dbContextOptionsBuilder.Options);
-            await context.Database.ExecuteSqlAsync($"SELECT * from {_tableName} LIMIT 1");
+            await using var context = (T)Activator.CreateInstance(typeof(T), _dbContextOptionsBuilder.Options);
+            FormattableString sql = $@"SELECT * from {DataBaseHelper.MigrationTableSchema}.""{DataBaseHelper.MigrationTableName}"" LIMIT 1";
+            await context.Database.ExecuteSqlAsync(sql);
             if(MyDbContext.IsAlive == false)
                 _logger.LogInformation("Connection to database is restored");
             

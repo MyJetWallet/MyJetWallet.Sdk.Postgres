@@ -15,6 +15,7 @@ namespace MyJetWallet.Sdk.Postgres
     public static class DataBaseHelper
     {
         public static string MigrationTableName = "__EFMigrationsHistory";
+        public static string MigrationTableSchema = "";
         
         public static void AddDatabase<T>(this IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory,
             bool replaceSllInstruction = true)
@@ -25,6 +26,8 @@ namespace MyJetWallet.Sdk.Postgres
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
 
             MigrationTableName = $"__EFMigrationsHistory_{schema}";
+            MigrationTableSchema = schema;
+            
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<T>();
@@ -87,6 +90,7 @@ namespace MyJetWallet.Sdk.Postgres
 
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
             MigrationTableName = $"__EFMigrationsHistory_{schema}";
+            MigrationTableSchema = schema;
 
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
@@ -100,7 +104,7 @@ namespace MyJetWallet.Sdk.Postgres
                 return optionsBuilder;
             });
 
-            services.AddSingleton<SqlLiveChecker<T>>();
+            services.AddHostedService<SqlLiveChecker<T>>();
         }
 
         public static PropertyBuilder<DateTime> SpecifyKindUtc<TEntity>(
