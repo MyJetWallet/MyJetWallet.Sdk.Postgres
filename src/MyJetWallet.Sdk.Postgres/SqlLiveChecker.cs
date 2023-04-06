@@ -1,25 +1,27 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyJetWallet.Sdk.Service.Tools;
 
 namespace MyJetWallet.Sdk.Postgres;
 
-public class SqlLiveChecker<T> where T : DbContext
+public class SqlLiveChecker<T> : IHostedService where T : DbContext
 {
     private readonly ILogger<SqlLiveChecker<T>> _logger;
     private readonly MyTaskTimer _timer;
     private readonly DbContextOptionsBuilder<T> _dbContextOptionsBuilder;
     private static string _tableName;
-    public SqlLiveChecker(ILogger<SqlLiveChecker<T>> logger, DbContextOptionsBuilder<T> dbContextOptionsBuilder, string migrationTableName)
+    public SqlLiveChecker(ILogger<SqlLiveChecker<T>> logger, DbContextOptionsBuilder<T> dbContextOptionsBuilder)
     {
         _logger = logger;
         _dbContextOptionsBuilder = dbContextOptionsBuilder;
         _timer = new MyTaskTimer(typeof(SqlLiveChecker<T>), TimeSpan.FromSeconds(10), logger, DoTime);
-        _tableName = migrationTableName;
+        _tableName = DataBaseHelper.MigrationTableName;
         
-        _timer.Start();
+        _logger.LogInformation("Database liveness checker is started");
     }
 
     private async Task DoTime()
@@ -28,6 +30,9 @@ public class SqlLiveChecker<T> where T : DbContext
         {
             await using var context = new MyDbContext(_dbContextOptionsBuilder.Options);
             await context.Database.ExecuteSqlAsync($"SELECT * from {_tableName} LIMIT 1");
+            if(MyDbContext.IsAlive == false)
+                _logger.LogInformation("Connection to database is restored");
+            
             MyDbContext.IsAlive = true;
         }
         catch (Exception e)
@@ -35,5 +40,15 @@ public class SqlLiveChecker<T> where T : DbContext
             _logger.LogInformation(e, "Connection to database is lost");
             MyDbContext.IsAlive = false;
         } 
+    }
+
+    public async Task StartAsync(CancellationToken cancellationToken)
+    {
+        _timer.Start();
+    }
+
+    public async Task StopAsync(CancellationToken cancellationToken)
+    {
+        _timer?.Dispose();
     }
 }

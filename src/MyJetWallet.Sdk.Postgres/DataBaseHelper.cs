@@ -14,6 +14,8 @@ namespace MyJetWallet.Sdk.Postgres
 {
     public static class DataBaseHelper
     {
+        public static string MigrationTableName = "__EFMigrationsHistory";
+        
         public static void AddDatabase<T>(this IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory,
             bool replaceSllInstruction = true)
             where T : DbContext
@@ -22,14 +24,14 @@ namespace MyJetWallet.Sdk.Postgres
 
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
 
-            var migrationTableName = $"__EFMigrationsHistory_{schema}";
+            MigrationTableName = $"__EFMigrationsHistory_{schema}";
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<T>();
                 optionsBuilder.UseNpgsql(connectionString,
                     builder =>
                     {
-                        builder.MigrationsHistoryTable(migrationTableName, schema);
+                        builder.MigrationsHistoryTable(MigrationTableName, schema);
                         builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(5), null);
                     });
                 
@@ -37,7 +39,7 @@ namespace MyJetWallet.Sdk.Postgres
                 return optionsBuilder;
             });
             
-            services.AddSingleton<SqlLiveChecker<T>>();
+            services.AddHostedService<SqlLiveChecker<T>>();
 
             var contextOptions = services.BuildServiceProvider().GetRequiredService<DbContextOptionsBuilder<T>>();
 
@@ -84,7 +86,7 @@ namespace MyJetWallet.Sdk.Postgres
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
-            var migrationTableName = $"__EFMigrationsHistory_{schema}";
+            MigrationTableName = $"__EFMigrationsHistory_{schema}";
 
             services.AddSingleton<DbContextOptionsBuilder<T>>(x =>
             {
@@ -92,7 +94,7 @@ namespace MyJetWallet.Sdk.Postgres
                 optionsBuilder.UseNpgsql(connectionString,
                     builder =>
                         builder.MigrationsHistoryTable(
-                            migrationTableName,
+                            MigrationTableName,
                             schema));
 
                 return optionsBuilder;
