@@ -13,7 +13,7 @@ The *MyJetWallet.Sdk.Postgres.csproj* project file contains:
 
 - 1 namespaces.
 - 4 named types.
-- 174 total lines of source code.
+- 178 total lines of source code.
 - Approximately 47 lines of executable code.
 - The highest cyclomatic complexity is 6 :heavy_check_mark:.
 
@@ -28,7 +28,7 @@ The *MyJetWallet.Sdk.Postgres.csproj* project file contains:
 The `MyJetWallet.Sdk.Postgres` namespace contains 4 named types.
 
 - 4 named types.
-- 174 total lines of source code.
+- 178 total lines of source code.
 - Approximately 47 lines of executable code.
 - The highest cyclomatic complexity is 6 :heavy_check_mark:.
 
@@ -41,16 +41,16 @@ The `MyJetWallet.Sdk.Postgres` namespace contains 4 named types.
 <br>
 
 - The `DataBaseHelper` contains 4 members.
-- 98 total lines of source code.
+- 102 total lines of source code.
 - Approximately 38 lines of executable code.
 - The highest cyclomatic complexity is 6 :heavy_check_mark:.
 
 | Member kind | Line number | Maintainability index | Cyclomatic complexity | Depth of inheritance | Class coupling | Lines of source / executable code |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L17' title='void DataBaseHelper.AddDatabase<T>(IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory, bool replaceSllInstruction = true)'>17</a> | 56 | 1 :heavy_check_mark: | 0 | 6 | 38 / 19 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L77' title='void DataBaseHelper.AddDatabaseWithoutMigrations<T>(IServiceCollection services, string schema, string connectionString, bool replaceSllInstruction = true)'>77</a> | 66 | 1 :heavy_check_mark: | 0 | 3 | 20 / 8 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L56' title='string DataBaseHelper.PrepareConnectionString(string connectionString, bool replaceSllInstruction)'>56</a> | 66 | 6 :heavy_check_mark: | 0 | 1 | 20 / 7 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L98' title='PropertyBuilder<DateTime> DataBaseHelper.SpecifyKindUtc<TEntity>(EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, DateTime>> propertyExpression)'>98</a> | 78 | 1 :heavy_check_mark: | 0 | 6 | 14 / 4 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L17' title='void DataBaseHelper.AddDatabase<T>(IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory, bool replaceSllInstruction = true)'>17</a> | 56 | 1 :heavy_check_mark: | 0 | 6 | 42 / 19 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L81' title='void DataBaseHelper.AddDatabaseWithoutMigrations<T>(IServiceCollection services, string schema, string connectionString, bool replaceSllInstruction = true)'>81</a> | 66 | 1 :heavy_check_mark: | 0 | 3 | 20 / 8 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L60' title='string DataBaseHelper.PrepareConnectionString(string connectionString, bool replaceSllInstruction)'>60</a> | 66 | 6 :heavy_check_mark: | 0 | 1 | 20 / 7 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L102' title='PropertyBuilder<DateTime> DataBaseHelper.SpecifyKindUtc<TEntity>(EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, DateTime>> propertyExpression)'>102</a> | 78 | 1 :heavy_check_mark: | 0 | 6 | 14 / 4 |
 
 <a href="#DataBaseHelper-class-diagram">:link: to `DataBaseHelper` class diagram</a>
 
