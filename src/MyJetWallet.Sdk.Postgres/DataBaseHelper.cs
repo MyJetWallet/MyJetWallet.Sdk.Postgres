@@ -35,6 +35,10 @@ namespace MyJetWallet.Sdk.Postgres
 
                 return optionsBuilder;
             });
+            
+            // new service<T>($"__EFMigrationsHistory_{schema}", schema)
+            // ctx.RawSql ("select * from schema.__EFMigrationsHistory_{schema} limit 1")
+            
 
             var contextOptions = services.BuildServiceProvider().GetRequiredService<DbContextOptionsBuilder<T>>();
 
