@@ -12,9 +12,9 @@ This file is dynamically maintained by a bot, *please do not* edit this by hand.
 The *MyJetWallet.Sdk.Postgres.csproj* project file contains:
 
 - 1 namespaces.
-- 4 named types.
-- 178 total lines of source code.
-- Approximately 47 lines of executable code.
+- 5 named types.
+- 233 total lines of source code.
+- Approximately 70 lines of executable code.
 - The highest cyclomatic complexity is 6 :heavy_check_mark:.
 
 <details>
@@ -25,11 +25,11 @@ The *MyJetWallet.Sdk.Postgres.csproj* project file contains:
 </summary>
 <br>
 
-The `MyJetWallet.Sdk.Postgres` namespace contains 4 named types.
+The `MyJetWallet.Sdk.Postgres` namespace contains 5 named types.
 
-- 4 named types.
-- 178 total lines of source code.
-- Approximately 47 lines of executable code.
+- 5 named types.
+- 233 total lines of source code.
+- Approximately 70 lines of executable code.
 - The highest cyclomatic complexity is 6 :heavy_check_mark:.
 
 <details>
@@ -40,17 +40,19 @@ The `MyJetWallet.Sdk.Postgres` namespace contains 4 named types.
 </summary>
 <br>
 
-- The `DataBaseHelper` contains 4 members.
-- 102 total lines of source code.
-- Approximately 38 lines of executable code.
+- The `DataBaseHelper` contains 6 members.
+- 110 total lines of source code.
+- Approximately 46 lines of executable code.
 - The highest cyclomatic complexity is 6 :heavy_check_mark:.
 
 | Member kind | Line number | Maintainability index | Cyclomatic complexity | Depth of inheritance | Class coupling | Lines of source / executable code |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L17' title='void DataBaseHelper.AddDatabase<T>(IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory, bool replaceSllInstruction = true)'>17</a> | 56 | 1 :heavy_check_mark: | 0 | 6 | 42 / 19 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L81' title='void DataBaseHelper.AddDatabaseWithoutMigrations<T>(IServiceCollection services, string schema, string connectionString, bool replaceSllInstruction = true)'>81</a> | 66 | 1 :heavy_check_mark: | 0 | 3 | 20 / 8 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L60' title='string DataBaseHelper.PrepareConnectionString(string connectionString, bool replaceSllInstruction)'>60</a> | 66 | 6 :heavy_check_mark: | 0 | 1 | 20 / 7 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L102' title='PropertyBuilder<DateTime> DataBaseHelper.SpecifyKindUtc<TEntity>(EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, DateTime>> propertyExpression)'>102</a> | 78 | 1 :heavy_check_mark: | 0 | 6 | 14 / 4 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L20' title='void DataBaseHelper.AddDatabase<T>(IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory, bool replaceSllInstruction = true)'>20</a> | 54 | 1 :heavy_check_mark: | 0 | 6 | 43 / 22 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L85' title='void DataBaseHelper.AddDatabaseWithoutMigrations<T>(IServiceCollection services, string schema, string connectionString, bool replaceSllInstruction = true)'>85</a> | 62 | 1 :heavy_check_mark: | 0 | 3 | 24 / 11 |
+| Field | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L17' title='string DataBaseHelper.MigrationTableName'>17</a> | 93 | 0 :heavy_check_mark: | 0 | 0 | 1 / 1 |
+| Field | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L18' title='string DataBaseHelper.MigrationTableSchema'>18</a> | 93 | 0 :heavy_check_mark: | 0 | 0 | 1 / 1 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L64' title='string DataBaseHelper.PrepareConnectionString(string connectionString, bool replaceSllInstruction)'>64</a> | 66 | 6 :heavy_check_mark: | 0 | 1 | 20 / 7 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/DataBaseHelper.cs#L110' title='PropertyBuilder<DateTime> DataBaseHelper.SpecifyKindUtc<TEntity>(EntityTypeBuilder<TEntity> builder, Expression<Func<TEntity, DateTime>> propertyExpression)'>110</a> | 78 | 1 :heavy_check_mark: | 0 | 6 | 14 / 4 |
 
 <a href="#DataBaseHelper-class-diagram">:link: to `DataBaseHelper` class diagram</a>
 
@@ -89,18 +91,19 @@ The `MyJetWallet.Sdk.Postgres` namespace contains 4 named types.
 </summary>
 <br>
 
-- The `MyDbContext` contains 5 members.
-- 26 total lines of source code.
-- Approximately 3 lines of executable code.
+- The `MyDbContext` contains 6 members.
+- 27 total lines of source code.
+- Approximately 4 lines of executable code.
 - The highest cyclomatic complexity is 2 :heavy_check_mark:.
 
 | Member kind | Line number | Maintainability index | Cyclomatic complexity | Depth of inheritance | Class coupling | Lines of source / executable code |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L12' title='MyDbContext.MyDbContext(DbContextOptions options)'>12</a> | 100 | 1 :heavy_check_mark: | 0 | 2 | 3 / 0 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L16' title='MyDbContext.MyDbContext()'>16</a> | 100 | 1 :heavy_check_mark: | 0 | 0 | 3 / 0 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L28' title='void MyDbContext.ConfigureConventions(ModelConfigurationBuilder configurationBuilder)'>28</a> | 100 | 1 :heavy_check_mark: | 0 | 2 | 4 / 1 |
-| Property | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L10' title='ILoggerFactory MyDbContext.LoggerFactory'>10</a> | 100 | 2 :heavy_check_mark: | 0 | 1 | 1 / 0 |
-| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L20' title='void MyDbContext.OnConfiguring(DbContextOptionsBuilder optionsBuilder)'>20</a> | 85 | 2 :heavy_check_mark: | 0 | 3 | 7 / 2 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L13' title='MyDbContext.MyDbContext(DbContextOptions options)'>13</a> | 100 | 1 :heavy_check_mark: | 0 | 2 | 3 / 0 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L17' title='MyDbContext.MyDbContext()'>17</a> | 100 | 1 :heavy_check_mark: | 0 | 0 | 3 / 0 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L29' title='void MyDbContext.ConfigureConventions(ModelConfigurationBuilder configurationBuilder)'>29</a> | 100 | 1 :heavy_check_mark: | 0 | 2 | 4 / 1 |
+| Field | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L10' title='bool MyDbContext.IsAlive'>10</a> | 93 | 0 :heavy_check_mark: | 0 | 0 | 1 / 1 |
+| Property | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L11' title='ILoggerFactory MyDbContext.LoggerFactory'>11</a> | 100 | 2 :heavy_check_mark: | 0 | 1 | 1 / 0 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/MyDbContext.cs#L21' title='void MyDbContext.OnConfiguring(DbContextOptionsBuilder optionsBuilder)'>21</a> | 85 | 2 :heavy_check_mark: | 0 | 3 | 7 / 2 |
 
 <a href="#MyDbContext-class-diagram">:link: to `MyDbContext` class diagram</a>
 
@@ -133,6 +136,35 @@ The `MyJetWallet.Sdk.Postgres` namespace contains 4 named types.
 
 </details>
 
+<details>
+<summary>
+  <strong id="sqllivecheckert">
+    SqlLiveChecker&lt;T&gt; :heavy_check_mark:
+  </strong>
+</summary>
+<br>
+
+- The `SqlLiveChecker<T>` contains 7 members.
+- 44 total lines of source code.
+- Approximately 14 lines of executable code.
+- The highest cyclomatic complexity is 2 :heavy_check_mark:.
+
+| Member kind | Line number | Maintainability index | Cyclomatic complexity | Depth of inheritance | Class coupling | Lines of source / executable code |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| Field | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/SqlLiveChecker.cs#L16' title='DbContextOptionsBuilder<T> SqlLiveChecker<T>._dbContextOptionsBuilder'>16</a> | 100 | 0 :heavy_check_mark: | 0 | 1 | 1 / 0 |
+| Field | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/SqlLiveChecker.cs#L14' title='ILogger<SqlLiveChecker<T>> SqlLiveChecker<T>._logger'>14</a> | 100 | 0 :heavy_check_mark: | 0 | 1 | 1 / 0 |
+| Field | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/SqlLiveChecker.cs#L15' title='MyTaskTimer SqlLiveChecker<T>._timer'>15</a> | 100 | 0 :heavy_check_mark: | 0 | 1 | 1 / 0 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/SqlLiveChecker.cs#L18' title='SqlLiveChecker<T>.SqlLiveChecker(ILogger<SqlLiveChecker<T>> logger, DbContextOptionsBuilder<T> dbContextOptionsBuilder)'>18</a> | 75 | 1 :heavy_check_mark: | 0 | 5 | 8 / 4 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/SqlLiveChecker.cs#L27' title='Task SqlLiveChecker<T>.DoTime()'>27</a> | 65 | 2 :heavy_check_mark: | 0 | 8 | 18 / 8 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/SqlLiveChecker.cs#L46' title='Task SqlLiveChecker<T>.StartAsync(CancellationToken cancellationToken)'>46</a> | 100 | 1 :heavy_check_mark: | 0 | 4 | 4 / 1 |
+| Method | <a href='https://github.com/MyJetWallet/MyJetWallet.Sdk.Postgres/blob/master/src/MyJetWallet.Sdk.Postgres/SqlLiveChecker.cs#L51' title='Task SqlLiveChecker<T>.StopAsync(CancellationToken cancellationToken)'>51</a> | 100 | 2 :heavy_check_mark: | 0 | 4 | 4 / 1 |
+
+<a href="#SqlLiveChecker&lt;T&gt;-class-diagram">:link: to `SqlLiveChecker&lt;T&gt;` class diagram</a>
+
+<a href="#myjetwallet-sdk-postgres">:top: back to MyJetWallet.Sdk.Postgres</a>
+
+</details>
+
 </details>
 
 <a href="#myjetwallet-sdk-postgres">:top: back to MyJetWallet.Sdk.Postgres</a>
@@ -155,6 +187,8 @@ The `MyJetWallet.Sdk.Postgres` namespace contains 4 named types.
 ```mermaid
 classDiagram
 class DataBaseHelper{
+    -string MigrationTableName$
+    -string MigrationTableSchema$
     +AddDatabase<T>(IServiceCollection services, string schema, string connectionString, Func<DbContextOptions, T> contextFactory, bool replaceSllInstruction = true)$ void
     +PrepareConnectionString(string connectionString, bool replaceSllInstruction)$ string
     +AddDatabaseWithoutMigrations<T>(IServiceCollection services, string schema, string connectionString, bool replaceSllInstruction = true)$ void
@@ -182,6 +216,7 @@ class MyDateTimeConverterToUtc{
 ```mermaid
 classDiagram
 class MyDbContext{
+    -bool IsAlive$
     +ILoggerFactory LoggerFactory$
     +.ctor(DbContextOptions options) MyDbContext
     +.ctor() MyDbContext
@@ -201,6 +236,24 @@ class MyDesignTimeContextFactory<T>{
     -Func<DbContextOptions, T> _contextFactory
     +ignTimeContextFactory(Func<DbContextOptions, T> contextFactory) void
     +CreateDbContext(string[] args) T
+}
+
+```
+
+<div id="SqlLiveChecker&lt;T&gt;-class-diagram"></div>
+
+##### `SqlLiveChecker<T>` class diagram
+
+```mermaid
+classDiagram
+class SqlLiveChecker<T>{
+    -ILogger<SqlLiveChecker<T>> _logger
+    -MyTaskTimer _timer
+    -DbContextOptionsBuilder<T> _dbContextOptionsBuilder
+    +veChecker(ILogger<SqlLiveChecker<T>> logger, DbContextOptionsBuilder<T> dbContextOptionsBuilder) void
+    +DoTime() Task
+    +StartAsync(CancellationToken cancellationToken) Task
+    +StopAsync(CancellationToken cancellationToken) Task
 }
 
 ```
