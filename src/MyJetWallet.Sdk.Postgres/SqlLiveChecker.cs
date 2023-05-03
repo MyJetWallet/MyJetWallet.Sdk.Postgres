@@ -29,7 +29,7 @@ public class SqlLiveChecker<T> : IHostedService where T : DbContext
         try
         {
             await using var context = (T)Activator.CreateInstance(typeof(T), _dbContextOptionsBuilder.Options);
-            var sql = $@"SELECT * from {DataBaseHelper.MigrationTableSchema}.""{DataBaseHelper.MigrationTableName}"" LIMIT 1;";
+            var sql = $@"SELECT * from ""{DataBaseHelper.MigrationTableSchema}"".""{DataBaseHelper.MigrationTableName}"" LIMIT 1;";
             await context.Database.GetDbConnection().QueryAsync($"{sql}");
             if(MyDbContext.IsAlive == false)
                 _logger.LogInformation("Connection to database is restored");
