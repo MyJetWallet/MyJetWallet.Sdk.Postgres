@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
@@ -35,12 +36,30 @@ public class SqlLiveChecker<T> : IHostedService where T : DbContext
                 _logger.LogInformation("Connection to database is restored");
             
             MyDbContext.IsAlive = true;
+
+            CheckLongContextUsage();
         }
         catch (Exception e)
         {
             _logger.LogInformation(e, "Connection to database is lost");
             MyDbContext.IsAlive = false;
         } 
+    }
+
+    private void CheckLongContextUsage()
+    {
+        var report = "";
+        lock (MyDbContext.Sync)
+        {
+            report = MyDbContext
+                .ContextList
+                .Where(e => (DateTime.UtcNow - e.Value.Item1).TotalSeconds > 5)
+                .Aggregate("",
+                    (s, e) => $"{s}; '{e.Value.Item2}'::{(DateTime.UtcNow - e.Value.Item1).TotalSeconds} seconds");
+        }
+        
+        if (!string.IsNullOrEmpty(report))
+            _logger.LogError("Detect long DB usage: {jsonText}", report);
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
