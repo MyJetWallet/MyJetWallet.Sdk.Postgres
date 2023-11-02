@@ -36,14 +36,22 @@ public class SqlLiveChecker<T> : IHostedService where T : DbContext
                 _logger.LogInformation("Connection to database is restored");
             
             MyDbContext.IsAlive = true;
-
-            CheckLongContextUsage();
         }
         catch (Exception e)
         {
             _logger.LogInformation(e, "Connection to database is lost");
             MyDbContext.IsAlive = false;
-        } 
+        }
+
+        try
+        {
+            CheckLongContextUsage();
+        }
+        catch (Exception e)
+        {
+            _logger.LogInformation(e, "Cannot check long context usage");
+            MyDbContext.IsAlive = false;
+        }
     }
 
     private void CheckLongContextUsage()
