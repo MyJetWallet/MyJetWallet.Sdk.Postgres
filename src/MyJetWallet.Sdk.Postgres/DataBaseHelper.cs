@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using MyJetWallet.Sdk.Service;
+using Npgsql;
 
 // ReSharper disable UnusedMember.Global
 
@@ -22,6 +23,12 @@ namespace MyJetWallet.Sdk.Postgres
             where T : DbContext
         {
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+            
+            NpgsqlConnection.GlobalTypeMapper
+                .EnableDynamicJson()
+                .EnableUnmappedTypes()
+                .EnableRecordsAsTuples()
+                .UseJsonNet();
 
             connectionString = PrepareConnectionString(connectionString, replaceSllInstruction);
 
@@ -37,8 +44,6 @@ namespace MyJetWallet.Sdk.Postgres
                         builder.MigrationsHistoryTable(MigrationTableName, schema);
                         builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(5), null);
                     });
-                
-
                 return optionsBuilder;
             });
             
