@@ -54,14 +54,14 @@ namespace MyJetWallet.Sdk.Postgres
 
         public override void Dispose()
         {
-            ContextList.Remove(ContextId);
+            lock (Sync) ContextList.Remove(ContextId);
             base.Dispose();
         }
 
         public override ValueTask DisposeAsync()
         {
-            lock (Sync) ContextList.Remove(ContextId);
-            lock (Sync) return base.DisposeAsync();
+            lock (Sync) ContextList.Remove(ContextId); 
+            return base.DisposeAsync();
         }
     }
 }
