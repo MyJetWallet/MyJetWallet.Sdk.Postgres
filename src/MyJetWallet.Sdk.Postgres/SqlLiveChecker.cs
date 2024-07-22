@@ -10,6 +10,12 @@ using MyJetWallet.Sdk.Service.Tools;
 
 namespace MyJetWallet.Sdk.Postgres;
 
+public static class SqlLiveCheckerSettings
+{
+    public static int DelayToReport = 5;
+    public static bool IsReportLongDelay = true;
+}
+
 public class SqlLiveChecker<T> : IHostedService where T : DbContext
 {
     private readonly ILogger<SqlLiveChecker<T>> _logger;
@@ -56,12 +62,15 @@ public class SqlLiveChecker<T> : IHostedService where T : DbContext
 
     private void CheckLongContextUsage()
     {
+        if (!SqlLiveCheckerSettings.IsReportLongDelay)
+            return;
+        
         var report = "";
         lock (MyDbContext.Sync)
         {
             report = MyDbContext
                 .ContextList
-                .Where(e => (DateTime.UtcNow - e.Value.Item1).TotalSeconds > 5)
+                .Where(e => (DateTime.UtcNow - e.Value.Item1).TotalSeconds > SqlLiveCheckerSettings.DelayToReport)
                 .Aggregate("",
                     (s, e) => $"{s}; '{e.Value.Item2}'::{(DateTime.UtcNow - e.Value.Item1).TotalSeconds} seconds");
         }
