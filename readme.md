@@ -91,9 +91,9 @@ Using cotext into the code
         }
 
         [HttpGet("data")]
-        public IEnumerable<MyTable> GetData()
+        public async Task<IEnumerable<MyTable>> GetData()
         {
-            using var ctx = new MyContext(_dbContextOptionsBuilder.Options);
+            await using var ctx = new MyContext(_dbContextOptionsBuilder.Options);
             var data = ctx.MyTable.ToList();
             return data;
         }
