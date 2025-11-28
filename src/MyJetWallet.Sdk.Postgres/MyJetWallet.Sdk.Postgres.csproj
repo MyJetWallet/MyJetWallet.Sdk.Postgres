@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.0">
     </PackageReference>
     <PackageReference Include="MyJetWallet.EntityFrameworkCore.Upsert" Version="8.0.0" />
-    <PackageReference Include="MyJetWallet.Sdk.Service" Version="2.9.1" />
+    <PackageReference Include="MyJetWallet.Sdk.Service" Version="2.10.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
     <PackageReference Include="Npgsql.Json.NET" Version="10.0.0" />
   </ItemGroup>
